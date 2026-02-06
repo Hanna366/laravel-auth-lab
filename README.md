@@ -6,7 +6,7 @@ This Laravel web application implements user authentication and a dashboard page
 ## Features Implemented
 - ✅ User registration and login system
 - ✅ Database migrations with proper schema
-- ✅ User factories and seeders (100+ users)
+- ✅ User factories and seeders (100+ users)gi
 - ✅ Protected dashboard route
 - ✅ Bootstrap frontend with responsive design
 - ✅ Proper authentication redirects
@@ -83,12 +83,11 @@ The users table includes:
     ```
 
 ## Sample Login Credentials
-After seeding, you can log in with any of the database users. Sample credentials:
-- **Username**: Any existing username in the database (either seeded or registered)
-- **Email**: Any existing email in the database (either seeded or registered)
-- **Password**: `password` (default for seeded users) or user-defined password (for registered users)
+You can log in with any valid email/password combination that exists in the database:
+- **Email**: Any email address saved in the database (e.g., `areshanna088@gmail.com`, or any other seeded/registered email)
+- **Password**: The corresponding password saved in the database ("password" for seeded users, user-defined for registered users)
 
-**Note**: The seeder creates 100+ realistic user accounts. Seeded users all have the password "password". When users register through the application, they create new entries in the database with their chosen credentials.
+**Note**: The seeder creates 100+ users with the default password "password". When users register through the application, their credentials are saved to the database with their chosen passwords.
 
 ## Routes
 - `/` - Welcome page
