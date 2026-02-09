@@ -1,262 +1,246 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'Laravel') }}</title>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body>
-    <!-- Modern SaaS Registration Layout -->
-    <div class="min-vh-100 d-flex align-items-start pt-3" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-        <div class="container">
-            <div class="row justify-content-center">
-                <!-- Left Side - Branding Section (Desktop Only) -->
-                <div class="col-lg-5 d-none d-lg-flex align-items-center">
-                    <div class="text-center text-white p-3">
-                        <!-- Branding Header -->
-                        <div class="mb-4">
-                            <h2 class="h3 fw-bold text-white mb-3">Create Account</h2>
-                            <h1 class="h4 fw-bold text-white-50">Join Our Platform</h1>
-                        </div>
-                        <p class="lead opacity-75">Join our platform and start managing your dashboard today</p>
-                        
-                        <!-- Feature Highlights -->
-                        <div class="mt-4">
-                            <div class="d-flex justify-content-center gap-4">
-                                <div class="text-center">
-                                    <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 50px; height: 50px;">
-                                        <i class="fas fa-user-plus"></i>
-                                    </div>
-                                    <small>Easy Setup</small>
-                                </div>
-                                <div class="text-center">
-                                    <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 50px; height: 50px;">
-                                        <i class="fas fa-sync"></i>
-                                    </div>
-                                    <small>Sync Data</small>
-                                </div>
-                                <div class="text-center">
-                                    <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 50px; height: 50px;">
-                                        <i class="fas fa-chart-line"></i>
-                                    </div>
-                                    <small>Analytics</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Right Side - Registration Form Section -->
-                <div class="col-lg-5 mt-4">
-                    <div class="card border-0 shadow-lg fade-in" style="border-radius: 15px; max-width: 450px; margin: 0 auto; margin-top: 1rem;">
-                        <div class="card-body p-5">
-                            <!-- Mobile Branding -->
-                            <div class="d-lg-none text-center mb-4">
-                                <h2 class="h4 mb-2 text-primary fw-bold">Create Account</h2>
-                                <p class="text-muted mb-0">Join us today and get started</p>
-                            </div>
-                            
-                            <!-- Desktop Branding Header -->
-                            <div class="d-none d-lg-block text-center mb-4">
-                                <h2 class="h4 mb-2 text-primary fw-bold">Sign Up</h2>
-                                <p class="text-muted mb-0">Create your account to get started</p>
-                            </div>
-                            
-                            <!-- Registration Form -->
-                            <form method="POST" action="{{ route('register') }}">
-                                @csrf
-
-                                <!-- Username Input with Icon -->
-                                <div class="mb-4">
-                                    <label for="username" class="form-label fw-semibold">
-                                        <i class="fas fa-user-tag me-2 text-muted"></i>{{ __('Username') }}
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light border-end-0">
-                                            <i class="fas fa-user-tag text-muted"></i>
-                                        </span>
-                                        <input 
-                                            id="username" 
-                                            type="text" 
-                                            class="form-control border-start-0 @error('username') is-invalid @enderror" 
-                                            name="username" 
-                                            value="{{ old('username') }}" 
-                                            required 
-                                            autocomplete="username" 
-                                            placeholder="Choose a username">
-                                    </div>
-                                    @error('username')
-                                        <div class="invalid-feedback d-block mt-1">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <!-- Name Input with Icon -->
-                                <div class="mb-4">
-                                    <label for="name" class="form-label fw-semibold">
-                                        <i class="fas fa-user me-2 text-muted"></i>{{ __('Full Name') }}
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light border-end-0">
-                                            <i class="fas fa-user text-muted"></i>
-                                        </span>
-                                        <input 
-                                            id="name" 
-                                            type="text" 
-                                            class="form-control border-start-0 @error('name') is-invalid @enderror" 
-                                            name="name" 
-                                            value="{{ old('name') }}" 
-                                            required 
-                                            autocomplete="name" 
-                                            autofocus
-                                            placeholder="Enter your full name">
-                                    </div>
-                                    @error('name')
-                                        <div class="invalid-feedback d-block mt-1">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <!-- Email Input with Icon -->
-                                <div class="mb-4">
-                                    <label for="email" class="form-label fw-semibold">
-                                        <i class="fas fa-envelope me-2 text-muted"></i>{{ __('Email Address') }}
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light border-end-0">
-                                            <i class="fas fa-envelope text-muted"></i>
-                                        </span>
-                                        <input 
-                                            id="email" 
-                                            type="email" 
-                                            class="form-control border-start-0 @error('email') is-invalid @enderror" 
-                                            name="email" 
-                                            value="{{ old('email') }}" 
-                                            required 
-                                            autocomplete="username"
-                                            placeholder="Enter your email address">
-                                    </div>
-                                    @error('email')
-                                        <div class="invalid-feedback d-block mt-1">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <!-- Password Input with Icon -->
-                                <div class="mb-4">
-                                    <label for="password" class="form-label fw-semibold">
-                                        <i class="fas fa-lock me-2 text-muted"></i>{{ __('Password') }}
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light border-end-0">
-                                            <i class="fas fa-lock text-muted"></i>
-                                        </span>
-                                        <input 
-                                            id="password" 
-                                            type="password" 
-                                            class="form-control border-start-0 @error('password') is-invalid @enderror" 
-                                            name="password" 
-                                            required 
-                                            autocomplete="new-password"
-                                            placeholder="Create a strong password">
-                                    </div>
-                                    @error('password')
-                                        <div class="invalid-feedback d-block mt-1">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <!-- Confirm Password Input with Icon -->
-                                <div class="mb-4">
-                                    <label for="password_confirmation" class="form-label fw-semibold">
-                                        <i class="fas fa-lock me-2 text-muted"></i>{{ __('Confirm Password') }}
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light border-end-0">
-                                            <i class="fas fa-lock text-muted"></i>
-                                        </span>
-                                        <input 
-                                            id="password_confirmation" 
-                                            type="password" 
-                                            class="form-control border-start-0" 
-                                            name="password_confirmation" 
-                                            required 
-                                            autocomplete="new-password"
-                                            placeholder="Confirm your password">
-                                    </div>
-                                </div>
-
-                                <!-- Register Button -->
-                                <div class="d-grid mb-4">
-                                    <button type="submit" class="btn btn-primary btn-lg py-3 fw-semibold">
-                                        <i class="fas fa-user-plus me-2"></i>{{ __('Create Account') }}
-                                    </button>
-                                </div>
-
-                                <!-- Login Link -->
-                                <div class="text-center">
-                                    <p class="mb-0 text-muted small">
-                                        {{ __('Already have an account?') }} 
-                                        <a class="text-decoration-none text-primary fw-semibold" href="{{ route('login') }}">
-                                            {{ __('Sign In') }}
-                                        </a>
-                                    </p>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Custom Styles -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'Laravel') }} - Register</title>
     <style>
-        /* Fade-in animation for registration card */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+        .register-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.6s ease-out;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* Input group focus styling */
-        .input-group:focus-within .input-group-text,
-        .input-group:focus-within .form-control {
-            border-color: #0d6efd;
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2.5rem;
         }
-        
-        /* Button hover animation */
-        .btn:hover {
+        .logo-container img {
+            height: 40px;
+            filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
+            transition: transform 0.3s ease;
+        }
+        .logo-container img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .form-group {
+            margin-bottom: 2rem;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
             transform: translateY(-2px);
-            transition: all 0.2s ease-in-out;
         }
-        
-        /* Card hover effect */
-        .card {
-            transition: all 0.3s ease-in-out;
+        .btn-register {
+            width: 100%;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
         }
-        
-        /* Responsive adjustments */
-        @media (max-width: 991.98px) {
-            .card {
-                margin-top: 2rem;
-            }
+        .text-center {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .text-muted {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        .text-decoration-none {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .text-decoration-none:hover {
+            color: #764ba2;
+            transform: translateY(-1px);
+        }
+        .alert {
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+        }
+        .alert-success {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+        }
+        .alert-danger {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            color: white;
+        }
+        .invalid-feedback {
+            display: block;
+            width: 100%;
+            margin-top: 0.5rem;
+            font-size: 0.875em;
+            color: #f56565;
+            font-weight: 500;
         }
     </style>
-    </body>
+</head>
+<body>
+    <div class="register-container">
+        <div class="logo-container">
+            <img src="{{ asset('img/laravel-svgrepo-com.svg') }}" alt="Laravel">
+        </div>
+
+        @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
+        @endif
+
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+
+            <div class="form-group">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" 
+                       id="name"
+                       class="form-control @error('name') is-invalid @enderror" 
+                       name="name" 
+                       value="{{ old('name') }}" 
+                       placeholder="Enter your full name" 
+                       required 
+                       autocomplete="name" 
+                       autofocus>
+                @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" 
+                       id="email"
+                       class="form-control @error('email') is-invalid @enderror" 
+                       name="email" 
+                       value="{{ old('email') }}" 
+                       placeholder="Enter your email address" 
+                       required 
+                       autocomplete="email">
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" 
+                       id="password"
+                       class="form-control @error('password') is-invalid @enderror" 
+                       name="password" 
+                       placeholder="Create a strong password" 
+                       required 
+                       autocomplete="new-password">
+                @error('password')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                <input type="password" 
+                       id="password_confirmation"
+                       class="form-control @error('password_confirmation') is-invalid @enderror" 
+                       name="password_confirmation" 
+                       placeholder="Confirm your password" 
+                       required 
+                       autocomplete="new-password">
+                @error('password_confirmation')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn-register">
+                    Sign Up
+                </button>
+            </div>
+
+            <div class="text-center">
+                <span class="text-muted">Already registered? </span>
+                <a href="{{ route('login') }}" class="text-decoration-none">Sign In</a>
+            </div>
+        </form>
+    </div>
+</body>
 </html>
